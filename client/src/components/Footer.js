@@ -56,7 +56,7 @@ export default function Footer() {
       <div className={styles.footerContainer}>
         <div className={styles.mainContainer}>
           <div className={styles.middleContainer}>
-            <Grid columns={2} padded>
+            <Grid columns={2} padded container>
               <Grid.Column>
                 <div>
                   <span style={{ fontSize: "22px", fontWeight: "600" }}>Stay in the loop</span>

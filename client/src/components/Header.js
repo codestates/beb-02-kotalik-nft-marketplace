@@ -28,7 +28,7 @@ export default function Header() {
           <li>
             <Link href="/profile">
               <a>
-                <Icon name="user circle outline" style={{ width: "26px" }} />
+                <Icon name="user circle outline" size="large" />
               </a>
             </Link>
           </li>
