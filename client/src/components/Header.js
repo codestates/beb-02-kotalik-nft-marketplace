@@ -13,31 +13,31 @@ export default function Header({ connectWallet, web3, account }) {
     <div className={styles.header}>
       <div className={styles.Container}>
         <Link href="/">
-          <a className={styles.logo}>
+          <div className={styles.logo}>
             <img src="/images/opensea.png" alt="logo" style={{ display: "flex", width: "40px", margin: "25px" }} />
             <span>OpenSea</span>
-          </a>
+          </div>
         </Link>
         <Input icon="search" placeholder="Search items, collections, and accounts" style={{ width: "50rem", height: "45px" }} />
         <ul className={styles.nav}>
           <li>
             <Link href="/myCollection">
-              <a>My Collection</a>
+              <div>My Collection</div>
             </Link>
           </li>
           <li>
             <Link href="/explore">
-              <a>Explore</a>
+              <div>Explore</div>
             </Link>
           </li>
           <li>
             <Link href="/create">
-              <a>Create</a>
+              <div>Create</div>
             </Link>
           </li>
           <li>
             <Link href="/profile">
-              <a>{isLogin ? <Icon name="user circle" size="large" /> : <Icon name="user circle outline" size="large" />}</a>
+              <div>{isLogin ? <Icon name="user circle" size="large" /> : <Icon name="user circle outline" size="large" />}</div>
             </Link>
           </li>
           <li>
