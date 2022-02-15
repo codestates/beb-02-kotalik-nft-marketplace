@@ -1,3 +1,4 @@
+import styles from "../styles/myCollection.module.css";
 export default function myCollection() {
-  return <div>myCollection</div>;
+  return <div className={styles.mainContainer}>myCollection</div>;
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Web3 from "web3";
+import styles from "../styles/profile.module.css";
 
 export default function profile() {
   const [web3, setWeb3] = useState();
@@ -24,7 +25,7 @@ export default function profile() {
     setAccount(accounts[0]);
   };
   return (
-    <div>
+    <div className={styles.mainContainer}>
       <button
         onClick={() => {
           connectWallet();
