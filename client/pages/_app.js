@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Header connectWallet={connectWallet} web3={web3} account={account} />
-      <Component {...pageProps} />
+      <Component web3={web3} account={account} />
       <div className="App">
         <div className="userInfo">주소: {account}</div>
       </div>
