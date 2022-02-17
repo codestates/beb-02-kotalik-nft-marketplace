@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input, Icon } from "semantic-ui-react";
 import styles from "./Header.module.css";
 import Link from "next/link";
+import axios from "axios";
 
-export default function Header({ connectWallet, web3, account }) {
+export default function Header({ connectWallet, connectKaikas, web3, account }) {
   const [isLogin, setIsLogin] = useState(false);
+
   const loginButton = (e) => {
-    setIsLogin(true);
     connectWallet();
+    setIsLogin(true);
   };
+
+  const kaikasLoginButton = (e) => {
+    connectKaikas();
+    setIsLogin(true);
+  };
+
   return (
     <div className={styles.header}>
       <div className={styles.Container}>
@@ -42,7 +50,12 @@ export default function Header({ connectWallet, web3, account }) {
           </li>
           <li>
             <div onClick={loginButton}>
-              <Icon name="book" size="large" />
+              <img className={styles.icon} src="https://dappimg.com/media/image/dapp/c74121a543544389b5dcb5bc59a39905.jpg" />
+            </div>
+          </li>
+          <li>
+            <div onClick={kaikasLoginButton}>
+              <img className={styles.icon} src="https://dappimg.com/media/image/dapp/f2c37dc5e72747b187d14793d70c1376.blob" />
             </div>
           </li>
         </ul>
