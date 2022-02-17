@@ -25,9 +25,21 @@ function MyApp({ Component, pageProps }) {
     accounts = await window.ethereum.request({
       method: "eth_requestAccounts",
     });
-
+    const address = accounts[0];
     setAccount(accounts[0]);
+    
+    axios.post(
+      'http://localhost:3000/login',
+      {headers: {'content-type': 'application/json'}, withCredentials: true},
+      {address}
+    )
+    .then((res) => {
+       console.log(res.message);
+    })
+    .catch((err) => console.log(err));
+
   };
+
   return (
     <>
       <Header connectWallet={connectWallet} web3={web3} account={account} />
