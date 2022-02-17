@@ -5,27 +5,6 @@ import styles from "../styles/index.module.css";
 import Link from "next/link";
 
 export default function Home() {
-  // const [web3, setWeb3] = useState();
-  // const [account, setAccount] = useState("");
-  // var accounts;
-  // useEffect(() => {
-  //   if (typeof window.ethereum !== "undefined") {
-  //     // window.ethereum이 있다면
-  //     try {
-  //       const web = new Web3(window.ethereum); // 새로운 web3 객체를 만든다
-  //       setWeb3(web);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
-  // }, []);
-  // const connectWallet = async () => {
-  //   accounts = await window.ethereum.request({
-  //     method: "eth_requestAccounts",
-  //   });
-
-  //   setAccount(accounts[0]);
-  // };
   return (
     <div className={styles.mainContainer}>
       <div className={styles.Contents}>
