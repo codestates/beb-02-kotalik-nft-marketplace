@@ -6,7 +6,6 @@ export default function create() {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.formContainer}>
-        {/* <div>Create New Item</div> */}
         <form action="/api/form" method="post">
           <label htmlFor="first">First Name</label>
           <input type="text" id="first" name="first" required />
