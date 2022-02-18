@@ -7,7 +7,9 @@ import styles from "../styles/myCollection.module.css";
 export default function myCollection({ web3, account }) {
   const [erc721list, setErc721list] = useState([]);
   // newErc721addr 에는 배포된 블록 주소값을 넣으면 됩니당
+  //0xC9E8a8AD7C0bAc7C04B5B14b82564EEea4DA86ff
   const [newErc721addr, setNewErc721Addr] = useState("");
+
   useEffect(() => {
     addNewErc721Token();
   }, []);

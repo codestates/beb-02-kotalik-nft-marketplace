@@ -1,9 +1,10 @@
 .mainContainer {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-sizing: border-box;
+    box-sizing: border-box; */
+    margin-top: 100px;
 }
 .formContainer{
     width: 60%;
