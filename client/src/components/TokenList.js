@@ -1,9 +1,9 @@
 import Erc721 from "./Erc721";
 
-function TokenList({ web3, account, erc721list, newErc721addr, tokenContract, myToken }) {
+function TokenList({ web3, account, nftlist, newErc721addr, newKip17addr, walletType, tokenContract, myToken }) {
   return (
     <div className="tokenlist">
-      <Erc721 web3={web3} account={account} erc721list={erc721list} newErc721addr={newErc721addr} />
+      <Erc721 web3={web3} account={account} nftlist={nftlist} newErc721addr={newErc721addr} walletType={walletType} />
     </div>
   );
 }

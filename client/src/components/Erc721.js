@@ -4,10 +4,10 @@ import styles from "./Erc721.module.css";
 import { Icon } from "semantic-ui-react";
 import Link from "next/link";
 
-function Erc721({ web3, account, erc721list, newErc721addr }) {
+function Erc721({ web3, account, nftlist, newErc721addr, newKip17addr, walletType }) {
   return (
     <div className={styles.mainContainer}>
-      {erc721list.map((token) => {
+      {nftlist.map((token) => {
         return (
           <Link href={`/nfts/${token.tokenId}`}>
             <div key={token.tokenId} className={styles.tokenContainer}>
