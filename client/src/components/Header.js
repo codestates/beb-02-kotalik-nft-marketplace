@@ -50,12 +50,12 @@ export default function Header({ connectWallet, connectKaikas, web3, account }) 
           </li>
           <li>
             <div onClick={loginButton}>
-              <img className={styles.icon} src="https://dappimg.com/media/image/dapp/c74121a543544389b5dcb5bc59a39905.jpg" />
+              <img className={styles.icon} src="/images/icon_metamask.jpg" />
             </div>
           </li>
           <li>
             <div onClick={kaikasLoginButton}>
-              <img className={styles.icon} src="https://dappimg.com/media/image/dapp/f2c37dc5e72747b187d14793d70c1376.blob" />
+              <img className={styles.icon} src="/images/icon_kaikas.png" />
             </div>
           </li>
         </ul>

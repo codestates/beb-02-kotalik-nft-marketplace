@@ -27,22 +27,17 @@ function MyApp({ Component, pageProps }) {
     });
     const address = accounts[0];
     setAccount(accounts[0]);
-    
-    axios.post(
-      'http://localhost:3000/login',
-      {headers: {'content-type': 'application/json'}, withCredentials: true},
-      {address}
-    )
-    .then((res) => {
-       console.log(res.message);
-    })
-    .catch((err) => console.log(err));
-
   };
+
+  const connectKaikas = async () => {
+    accounts = await klaytn.enable();
+    const address = accounts[0];
+    setAccount(accounts[0]);
+  }
 
   return (
     <>
-      <Header connectWallet={connectWallet} web3={web3} account={account} />
+      <Header connectWallet={connectWallet} connectKaikas={connectKaikas} web3={web3} account={account} />
       <Component web3={web3} account={account} />
       <div className="App">
         <div className="userInfo">주소: {account}</div>
