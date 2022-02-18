@@ -3,18 +3,27 @@ import { useEffect, useState } from "react";
 import { Icon } from "semantic-ui-react";
 import styles from "../../styles/id.module.css";
 import erc721Abi from "../../src/erc721Abi";
-const Post = ({ web3, account, erc721list }) => {
+import kip17Abi from "../../src/kip17Abi";
+
+const Post = ({ web3, account, nftlist, walletType }) => {
   const [token, setToken] = useState([]);
   // newErc721addr 에는 배포된 블록 주소값을 넣으면 됩니당
-  // erc7210 xC9E8a8AD7C0bAc7C04B5B14b82564EEea4DA86ff
+  // erc721 0xC9E8a8AD7C0bAc7C04B5B14b82564EEea4DA86ff
   // kip17   0xce940F5D2d13478A912D723C26f9Ee0f03aFcbb3
-  const [newErc721addr, setNewErc721Addr] = useState("0xce940F5D2d13478A912D723C26f9Ee0f03aFcbb3");
+  const [newErc721addr, setNewErc721Addr] = useState("0xC9E8a8AD7C0bAc7C04B5B14b82564EEea4DA86ff");
+  const [newKip17addr, setNewKip17Addr] = useState("0xce940F5D2d13478A912D723C26f9Ee0f03aFcbb3");
   const router = useRouter();
   const { id } = router.query;
+  console.log(walletType)
 
   useEffect(async () => {
-    //const tokenContract = await new web3.eth.Contract(erc721Abi, newErc721addr);
-    const tokenContract = await new caver.klay.Contract(erc721Abi, newErc721addr);
+    const tokenContract = '';
+    if(walletType === 'eth') {
+      tokenContract = await new web3.eth.Contract(erc721Abi, newErc721addr);
+    } else {
+      tokenContract = await new caver.klay.Contract(kip17Abi, newKip17addr);
+    }
+    
     const name = await tokenContract.methods.name().call();
     const symbol = await tokenContract.methods.symbol().call();
     let tokenURI = await tokenContract.methods.tokenURI(id).call();

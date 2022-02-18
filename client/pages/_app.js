@@ -10,6 +10,7 @@ function MyApp({ Component, pageProps }) {
   const [web3, setWeb3] = useState();
   const [caver, setCaver] = useState();
   const [account, setAccount] = useState("");
+  const [walletType, setWalletType] = useState("");
 
   let accounts;
   useEffect(() => {
@@ -38,18 +39,20 @@ function MyApp({ Component, pageProps }) {
     });
     const address = accounts[0];
     setAccount(accounts[0]);
+    setWalletType("eth");
   };
 
   const connectKaikas = async () => {
     accounts = await klaytn.enable();
     const address = accounts[0];
     setAccount(accounts[0]);
+    setWalletType("klay");
   }
 
   return (
     <>
       <Header connectWallet={connectWallet} connectKaikas={connectKaikas} web3={web3} caver={caver} account={account} />
-      <Component web3={web3} caver={caver} account={account} />
+      <Component web3={web3} caver={caver} account={account} walletType={walletType}/>
       <div className="App">
         <div className="userInfo">주소: {account}</div>
       </div>

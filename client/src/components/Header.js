@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Input, Icon } from "semantic-ui-react";
 import styles from "./Header.module.css";
 import Link from "next/link";
-import axios from "axios";
 
-export default function Header({ connectWallet, connectKaikas, web3, account }) {
+export default function Header({ connectWallet, connectKaikas, web3, account, setWalletType}) {
   const [isLogin, setIsLogin] = useState(false);
 
   const loginButton = (e) => {
