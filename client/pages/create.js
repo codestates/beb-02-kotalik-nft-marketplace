@@ -1,46 +1,37 @@
 import erc721Abi from "../src/erc721Abi";
-import IpfsApi from "ipfs-api";
 import { useState } from "react";
 import styles from "../styles/create.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Input, Icon, TextArea, Button, Divider } from "semantic-ui-react";
 import { useRouter } from "next/router";
+import { create } from "ipfs-http-client";
 
-export default function create({ web3, account, walletType }) {
+export default function createNFT({ caver, web3, account, walletType }) {
   const [buffer, setBuffer] = useState([]);
-  const [ipfsLink, setIpfsLink] = useState("");
+  const [fileUrl, updateFileUrl] = useState(``);
   const [newErc721addr, setNewErc721Addr] = useState("0x787b226eA9B0c0b8f3558EA4b9aE088fDE7B7b3B");
-  const [newKip17addr, setNewKip17Addr] = useState("0x038959C3Ed4A26C803c07EF476049F6aE9dFB288");
+  const [newKip17addr, setNewKip17Addr] = useState("0x5D5232969dAb1134c25b2847A0490686A425561A");
   const [nftDesc, setNftDesc] = useState("");
   const [nftName, setNftName] = useState("");
   const [isMint, setIsMint] = useState(false);
   const [image, setImage] = useState(null);
   const router = useRouter();
-  const ipfsApi = IpfsApi("ipfs.infura.io", "5001", { protocol: "http" });
+
+  const client = create("https://ipfs.infura.io:5001/api/v0");
 
   const moveToHome = () => {
     router.push("/");
   };
-  const changeHandler = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      setImage(URL.createObjectURL(event.target.files[0]));
+  const onChange = async (e) => {
+    const file = e.target.files[0];
+    setImage(URL.createObjectURL(file));
+    try {
+      const added = await client.add(file);
+      const url = `https://ipfs.infura.io/ipfs/${added.path}`;
+      updateFileUrl(url);
+    } catch (error) {
+      console.log("Error uploading file: ", error);
     }
-    const file = event.target.files[0];
-    const reader = new window.FileReader();
-    reader.readAsArrayBuffer(file);
-    reader.onloadend = () => {
-      const fileBuffer = Buffer(reader.result);
-      setBuffer(fileBuffer);
-    };
-  };
-
-  const handleSubmission = async () => {
-    ipfsApi.files.add(buffer, (error, result) => {
-      if (error) {
-        console.log(error);
-      }
-      setIpfsLink("https://gateway.ipfs.io/ipfs/" + result[0].hash);
-    });
   };
 
   const createNewNFT = async () => {
@@ -52,13 +43,13 @@ export default function create({ web3, account, walletType }) {
         from: account,
       });
       tokenContract.options.address = newErc721addr;
-      newTokenId = await tokenContract.methods.mintNFT(account, ipfsLink).send();
+      newTokenId = await tokenContract.methods.mintNFT(account, fileUrl).send();
     } else {
       tokenContract = await new caver.klay.Contract(erc721Abi, newKip17addr, {
         from: account,
       });
       tokenContract.options.address = newKip17addr;
-      newTokenId = await tokenContract.methods.mintNFT(account, ipfsLink).send({ from: account, gas: 0xf4240 });
+      newTokenId = await tokenContract.methods.mintNFT(account, fileUrl).send({ from: account, gas: 0xf4240 });
     }
     const name = await tokenContract.methods.name().call();
     const symbol = await tokenContract.methods.symbol().call();
@@ -93,13 +84,10 @@ export default function create({ web3, account, walletType }) {
               <label for="fileInput">
                 {image ? <img for="fileInput" src={image} alt="preview image" className={styles.selectedImage} /> : <Icon name="file image outline" size="huge" />}
               </label>
-              <input type="file" name="file" onChange={changeHandler} id="fileInput" />
+              <input type="file" name="file" onChange={onChange} id="fileInput" />
             </div>
             <br></br>
-            <div>
-              <Button content="Create IPFS Hash" onClick={handleSubmission} />
-              {ipfsLink ? <div>IPFS Link: {ipfsLink}</div> : ""}
-            </div>
+            <div>{fileUrl ? <div>IPFS Link: {fileUrl}</div> : ""}</div>
           </div>
           <br></br>
           <div className={styles.contentContainer}>

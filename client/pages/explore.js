@@ -6,16 +6,15 @@ import kip17Abi from "../src/kip17Abi";
 import { Dimmer, Divider, Loader, Segment } from "semantic-ui-react";
 import styles from "../styles/explore.module.css";
 
-export default function explore({ web3, account, nftlist, walletType, mine }) {
-  const [myToken, setMyToken] = useState([]);
+export default function explore({ caver, web3, account, nftlist, walletType, mine }) {
   const [notMyToken, setNotMyToken] = useState([]);
   const [newErc721addr, setNewErc721Addr] = useState("0x787b226eA9B0c0b8f3558EA4b9aE088fDE7B7b3B");
-  const [newKip17addr, setNewKip17Addr] = useState("0x038959C3Ed4A26C803c07EF476049F6aE9dFB288");
+  const [newKip17addr, setNewKip17Addr] = useState("0x5D5232969dAb1134c25b2847A0490686A425561A");
   const [isLoading, setIsLoading] = useState(true);
   useEffect(async () => {
-    saveMyToken();
+    saveNotMyToken();
   }, []);
-  const saveMyToken = async () => {
+  const saveNotMyToken = async () => {
     const tokenContract = "";
     if (walletType === "eth") {
       tokenContract = await new web3.eth.Contract(erc721Abi, newErc721addr);
@@ -30,15 +29,6 @@ export default function explore({ web3, account, nftlist, walletType, mine }) {
       arr.push(i);
     }
 
-    for (let tokenId of arr) {
-      let tokenOwner = await tokenContract.methods.ownerOf(tokenId).call();
-      if (String(tokenOwner).toLowerCase() === account) {
-        let tokenURI = await tokenContract.methods.tokenURI(tokenId).call();
-        setMyToken((prevState) => {
-          return [...prevState, { name, symbol, tokenId, tokenURI, mine: true }];
-        });
-      }
-    }
     for (let tokenId of arr) {
       let tokenOwner = await tokenContract.methods.ownerOf(tokenId).call();
       if (String(tokenOwner).toLowerCase() !== account) {

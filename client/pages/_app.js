@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }) {
   const [account, setAccount] = useState("");
   const [tokenContract, setTokenContract] = useState();
   const [newErc721addr, setNewErc721Addr] = useState("0x787b226eA9B0c0b8f3558EA4b9aE088fDE7B7b3B");
-  const [newKip17addr, setNewKip17Addr] = useState("0x038959C3Ed4A26C803c07EF476049F6aE9dFB288");
+  const [newKip17addr, setNewKip17Addr] = useState("0x5D5232969dAb1134c25b2847A0490686A425561A");
   const [totalToken, setTotalToken] = useState([]);
   const [myToken, setMyToken] = useState([]);
   const [isLogin, setIsLogin] = useState(false);
