@@ -6,6 +6,7 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    
 }
 
 .Contents{
@@ -14,8 +15,7 @@
     align-items: center;
     justify-content: center;
     width: 70%;
-    /* height: 615px; */
-    
+    /* z-index: -1; */
 }
 .mainContent{
     display: grid;

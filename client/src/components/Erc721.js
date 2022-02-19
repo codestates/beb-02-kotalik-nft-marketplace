@@ -1,15 +1,15 @@
 import erc721Abi from "../erc721Abi";
-
+import { useState, useEffect } from "react";
 import styles from "./Erc721.module.css";
 import { Icon } from "semantic-ui-react";
 import Link from "next/link";
 
-function Erc721({ web3, account, nftlist, newErc721addr, newKip17addr, walletType }) {
+function Erc721({ web3, account, nftlist, newErc721addr, newKip17addr, walletType, mine }) {
   return (
     <div className={styles.mainContainer}>
       {nftlist.map((token) => {
         return (
-          <Link href={`/nfts/${token.tokenId}`}>
+          <Link href={mine ? `/mynft/${token.tokenId}` : `/nfts/${token.tokenId}`}>
             <div key={token.tokenId} className={styles.tokenContainer}>
               <img
                 src={token.tokenURI}

@@ -1,9 +1,11 @@
+import { useEffect, useState } from "react";
 import Erc721 from "./Erc721";
+import erc721Abi from "../erc721Abi";
 
-function TokenList({ web3, account, nftlist, newErc721addr, newKip17addr, walletType, tokenContract, myToken }) {
+function TokenList({ web3, account, nftlist, newErc721addr, newKip17addr, walletType, tokenContract, myToken, mine }) {
   return (
     <div className="tokenlist">
-      <Erc721 web3={web3} account={account} nftlist={nftlist} newErc721addr={newErc721addr} walletType={walletType} />
+      <Erc721 web3={web3} account={account} nftlist={nftlist} newKip17addr={newKip17addr} newErc721addr={newErc721addr} mine={mine} />
     </div>
   );
 }

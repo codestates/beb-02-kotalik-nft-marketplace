@@ -1,50 +1,74 @@
 import React, { useState, useEffect } from "react";
-import { Input, Icon } from "semantic-ui-react";
+import { Input, Icon, Label } from "semantic-ui-react";
 import styles from "./Header.module.css";
 import Link from "next/link";
 
-export default function Header({ connectWallet, connectKaikas, web3, account, setWalletType}) {
-  const [isLogin, setIsLogin] = useState(false);
-
-  const loginButton = (e) => {
-    connectWallet();
-    setIsLogin(true);
+export default function Header({ connectKaikas, connectWallet, web3, account, tokenSave, isLogin, setIsLogin, setAccount, setWalletType, walletType }) {
+  const metaImageProps = {
+    avatar: true,
+    spaced: "right",
+    src: "/images/icon_metamask.jpg",
   };
-
+  const klayImageProps = {
+    avatar: true,
+    spaced: "right",
+    src: "/images/icon_kaikas.png",
+  };
+  const loginButton = () => {
+    if (!isLogin) {
+      connectWallet();
+    }
+    if (isLogin) {
+      setAccount("");
+    }
+    setIsLogin(!isLogin);
+    tokenSave(account);
+  };
   const kaikasLoginButton = (e) => {
-    connectKaikas();
-    setIsLogin(true);
+    if (!isLogin) {
+      connectKaikas();
+    }
+    if (isLogin) {
+      setAccount("");
+    }
+    setIsLogin(!isLogin);
+    tokenSave(account);
   };
-
   return (
     <div className={styles.header}>
       <div className={styles.Container}>
         <Link href="/">
-          <div className={styles.logo}>
+          <a className={styles.logo}>
             <img src="/images/opensea.png" alt="logo" style={{ display: "flex", width: "40px", margin: "25px" }} />
             <span>OpenSea</span>
-          </div>
+          </a>
         </Link>
         <Input icon="search" placeholder="Search items, collections, and accounts" style={{ width: "50rem", height: "45px" }} />
         <ul className={styles.nav}>
           <li>
-            <Link href="/myCollection">
-              <div>My Collection</div>
-            </Link>
+            <div>
+              {!isLogin ? (
+                <Label color="red"> Unconnected Accout</Label>
+              ) : walletType === "eth" ? (
+                <Label as="a" color="orange" content="MetaMask" image={metaImageProps} />
+              ) : (
+                <Label as="a" color="gray" content="Kaikas" image={klayImageProps} />
+              )}
+            </div>
           </li>
           <li>
             <Link href="/explore">
-              <div>Explore</div>
+              <a>Explore</a>
             </Link>
           </li>
           <li>
             <Link href="/create">
-              <div>Create</div>
+              <a>Create</a>
             </Link>
           </li>
           <li>
-            <Link href="/profile">
-              <div>{isLogin ? <Icon name="user circle" size="large" /> : <Icon name="user circle outline" size="large" />}</div>
+            <Link href="/mynft">
+              <Icon name="user circle outline" size="large" />
             </Link>
           </li>
           <li>
@@ -57,6 +81,17 @@ export default function Header({ connectWallet, connectKaikas, web3, account, se
               <img className={styles.icon} src="/images/icon_kaikas.png" />
             </div>
           </li>
+          {/* <li>
+            {isLogin ? (
+              <div onClick={loginButton}>
+                <Icon name="sign-out" size="large" />
+              </div>
+            ) : (
+              <div onClick={loginButton}>
+                <Icon name="sign-in" size="large" />
+              </div>
+            )}
+          </li> */}
         </ul>
       </div>
     </div>
