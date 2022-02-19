@@ -1,16 +1,20 @@
+
 .header{
     top: 0;
     left: 0;
     position: fixed;
     width: 100%;
+    background-color: #ffffff;
     /* padding-bottom: 72px; */
+}
+.header a {
+    text-decoration: none;
 }
 .Container{
     background-color: #ffffff;
     width: 100%;
-    position: fixed;
     display: flex;
-    height: 72px;
+    height: 80px;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
@@ -22,13 +26,14 @@
     align-items: center;
     letter-spacing: 1px;
 }
-.logo span {
+.logo span{
     font-size: 24px;
     font-weight: 600;
     text-decoration: none;
     color: black;
 }
 .nav {
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,9 +41,12 @@
 }
 .nav li {
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     font-size: 22px;
     font-weight: 600;
-    padding-right: 35px;
+    margin-right: 25px;
 }
 .nav li a{
     letter-spacing: 1px;
@@ -48,4 +56,10 @@
 .icon {
     width: 30px;
     height: 30px;
+}
+.labelContainer{
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    align-items: center;
 }

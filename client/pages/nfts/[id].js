@@ -1,34 +1,32 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Icon } from "semantic-ui-react";
+import { Divider, Icon } from "semantic-ui-react";
 import styles from "../../styles/id.module.css";
 import erc721Abi from "../../src/erc721Abi";
 import kip17Abi from "../../src/kip17Abi";
 
-const Post = ({ web3, account, nftlist, walletType }) => {
+const Post = ({ web3, account, tokenContract, walletType, nftlist }) => {
   const [token, setToken] = useState([]);
-  // newErc721addr 에는 배포된 블록 주소값을 넣으면 됩니당
-  // erc721 0xC9E8a8AD7C0bAc7C04B5B14b82564EEea4DA86ff
-  // kip17   0xce940F5D2d13478A912D723C26f9Ee0f03aFcbb3
-  const [newErc721addr, setNewErc721Addr] = useState("0xC9E8a8AD7C0bAc7C04B5B14b82564EEea4DA86ff");
-  const [newKip17addr, setNewKip17Addr] = useState("0xce940F5D2d13478A912D723C26f9Ee0f03aFcbb3");
+  const [newErc721addr, setNewErc721Addr] = useState("0x787b226eA9B0c0b8f3558EA4b9aE088fDE7B7b3B");
+  const [newKip17addr, setNewKip17Addr] = useState("0x038959C3Ed4A26C803c07EF476049F6aE9dFB288");
+
   const router = useRouter();
   const { id } = router.query;
-  console.log(walletType)
 
   useEffect(async () => {
-    const tokenContract = '';
-    if(walletType === 'eth') {
+    const tokenContract = "";
+    if (walletType === "eth") {
       tokenContract = await new web3.eth.Contract(erc721Abi, newErc721addr);
     } else {
       tokenContract = await new caver.klay.Contract(kip17Abi, newKip17addr);
     }
-    
     const name = await tokenContract.methods.name().call();
     const symbol = await tokenContract.methods.symbol().call();
     let tokenURI = await tokenContract.methods.tokenURI(id).call();
-    setToken({ name, symbol, id, tokenURI });
+    let tokenOwner = await tokenContract.methods.ownerOf(id).call();
+    setToken({ name, symbol, id, tokenURI, tokenOwner });
   }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.mainContainer}>
@@ -51,6 +49,19 @@ const Post = ({ web3, account, nftlist, walletType }) => {
                 <Icon name="info circle" size="large" />
               </div>
             </div>
+          </div>
+        </div>
+        <div className={styles.tokenTransferContainer} style={{ height: "70%" }}>
+          <h1>Token Info</h1>
+          <Divider />
+          <br />
+          <div className={styles.contentContainer}>
+            <p className={styles.contentFont}>Token ID</p>
+            <p style={{ fontSize: "28px" }}>{token.id}</p>
+            <br />
+            <br />
+            <p className={styles.contentFont}>Token Owner</p>
+            <p className={styles.contentValue}>{token.tokenOwner}</p>
           </div>
         </div>
       </div>

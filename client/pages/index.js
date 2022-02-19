@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
-import Web3 from "web3";
-import { Grid, Icon, Form, Divider, Button } from "semantic-ui-react";
+import { Icon, Button } from "semantic-ui-react";
 import styles from "../styles/index.module.css";
 import Link from "next/link";
 
