@@ -77,7 +77,7 @@ export default function Footer() {
                       <Grid.Row centered columns={6}>
                         <Grid.Column>
                           <div className={styles.snsContainer}>
-                            <Icon name="twitter" color="white" size="big" />
+                            <Icon name="twitter" size="big" />
                           </div>
                         </Grid.Column>
                         <Grid.Column>
