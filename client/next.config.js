@@ -8,6 +8,8 @@ module.exports = {
       http: false,
       https: false,
       stream: false,
+      constants: false,
+      path: false,
     };
 
     return config;

@@ -9,7 +9,7 @@ const Post = ({ web3, account, walletType, nftlist }) => {
   const [token, setToken] = useState([]);
   const [to, setTo] = useState("");
   const [newErc721addr, setNewErc721Addr] = useState("0x787b226eA9B0c0b8f3558EA4b9aE088fDE7B7b3B");
-  const [newKip17addr, setNewKip17Addr] = useState("0x038959C3Ed4A26C803c07EF476049F6aE9dFB288");
+  const [newKip17addr, setNewKip17Addr] = useState("0x5D5232969dAb1134c25b2847A0490686A425561A");
   const router = useRouter();
   const { id } = router.query;
 
@@ -20,6 +20,7 @@ const Post = ({ web3, account, walletType, nftlist }) => {
     } else {
       tokenContract = await new caver.klay.Contract(kip17Abi, newKip17addr);
     }
+    console.log(tokenContract);
     const name = await tokenContract.methods.name().call();
     const symbol = await tokenContract.methods.symbol().call();
     let tokenURI = await tokenContract.methods.tokenURI(id).call();
