@@ -6,7 +6,9 @@ import "semantic-ui-css/semantic.min.css";
 import { useState, useEffect } from "react";
 import Web3 from "web3";
 import erc721Abi from "../src/erc721Abi";
+import kip17Abi from "../src/kip17Abi";
 import { useRouter } from "next/router";
+import Caver from "caver-js";
 
 function MyApp({ Component, pageProps }) {
   const [web3, setWeb3] = useState();
@@ -18,7 +20,7 @@ function MyApp({ Component, pageProps }) {
   const [myToken, setMyToken] = useState([]);
   const [isLogin, setIsLogin] = useState(false);
   const [walletType, setWalletType] = useState("");
-
+  const [caver, setCaver] = useState();
   const router = useRouter();
   let accounts;
   useEffect(() => {
@@ -26,6 +28,14 @@ function MyApp({ Component, pageProps }) {
       try {
         const web = new Web3(window.ethereum);
         setWeb3(web);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    if (typeof klaytn !== "undefined") {
+      try {
+        const caver = new Caver(klaytn);
+        setCaver(caver);
       } catch (err) {
         console.log(err);
       }
@@ -105,6 +115,7 @@ function MyApp({ Component, pageProps }) {
       />
       {(!isLogin && router.route === "/") || isLogin ? (
         <Component
+          caver={caver}
           web3={web3}
           account={account}
           totalToken={totalToken}
