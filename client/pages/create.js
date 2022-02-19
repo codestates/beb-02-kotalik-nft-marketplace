@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Input, Icon, TextArea, Button, Divider } from "semantic-ui-react";
 import { useRouter } from "next/router";
 
-export default function create({ web3, account, walletType }) {
+export default function create({ caver, web3, account, walletType }) {
   const [buffer, setBuffer] = useState([]);
   const [ipfsLink, setIpfsLink] = useState("");
   const [newErc721addr, setNewErc721Addr] = useState("0x787b226eA9B0c0b8f3558EA4b9aE088fDE7B7b3B");

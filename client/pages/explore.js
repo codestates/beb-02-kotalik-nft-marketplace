@@ -6,7 +6,7 @@ import kip17Abi from "../src/kip17Abi";
 import { Dimmer, Divider, Loader, Segment } from "semantic-ui-react";
 import styles from "../styles/explore.module.css";
 
-export default function explore({ web3, account, nftlist, walletType, mine }) {
+export default function explore({ caver, web3, account, nftlist, walletType, mine }) {
   const [myToken, setMyToken] = useState([]);
   const [notMyToken, setNotMyToken] = useState([]);
   const [newErc721addr, setNewErc721Addr] = useState("0x787b226eA9B0c0b8f3558EA4b9aE088fDE7B7b3B");

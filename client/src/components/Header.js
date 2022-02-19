@@ -3,7 +3,7 @@ import { Input, Icon, Label } from "semantic-ui-react";
 import styles from "./Header.module.css";
 import Link from "next/link";
 
-export default function Header({ connectKaikas, connectWallet, web3, account, tokenSave, isLogin, setIsLogin, setAccount, setWalletType, walletType }) {
+export default function Header({ connectKaikas, connectWallet, account, tokenSave, isLogin, setIsLogin, setAccount, walletType }) {
   const metaImageProps = {
     avatar: true,
     spaced: "right",
