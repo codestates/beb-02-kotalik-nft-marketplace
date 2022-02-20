@@ -5,11 +5,9 @@ import { Button, Divider, Icon, Input } from "semantic-ui-react";
 import erc721Abi from "../../src/erc721Abi";
 import kip17Abi from "../../src/kip17Abi";
 
-const Post = ({ web3, account, walletType, nftlist }) => {
+const Post = ({ web3, account, walletType, nftlist, newErc721addr, newKip17addr }) => {
   const [token, setToken] = useState([]);
   const [to, setTo] = useState("");
-  const [newErc721addr, setNewErc721Addr] = useState("0x787b226eA9B0c0b8f3558EA4b9aE088fDE7B7b3B");
-  const [newKip17addr, setNewKip17Addr] = useState("0x5D5232969dAb1134c25b2847A0490686A425561A");
   const router = useRouter();
   const { id } = router.query;
 

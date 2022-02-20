@@ -6,11 +6,9 @@ import { Input, Icon, TextArea, Button, Divider } from "semantic-ui-react";
 import { useRouter } from "next/router";
 import { create } from "ipfs-http-client";
 
-export default function createNFT({ caver, web3, account, walletType }) {
-  const [buffer, setBuffer] = useState([]);
+export default function createNFT({ caver, web3, account, walletType, newErc721addr, newKip17addr }) {
   const [fileUrl, updateFileUrl] = useState(``);
-  const [newErc721addr, setNewErc721Addr] = useState("0x787b226eA9B0c0b8f3558EA4b9aE088fDE7B7b3B");
-  const [newKip17addr, setNewKip17Addr] = useState("0x5D5232969dAb1134c25b2847A0490686A425561A");
+
   const [nftDesc, setNftDesc] = useState("");
   const [nftName, setNftName] = useState("");
   const [isMint, setIsMint] = useState(false);

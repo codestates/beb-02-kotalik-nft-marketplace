@@ -115,6 +115,8 @@ function MyApp({ Component, pageProps }) {
       />
       {(!isLogin && router.route === "/") || isLogin ? (
         <Component
+          newErc721addr={newErc721addr}
+          newKip17addr={newKip17addr}
           caver={caver}
           web3={web3}
           account={account}

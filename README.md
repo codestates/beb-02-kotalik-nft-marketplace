@@ -16,6 +16,19 @@
 
 ### Prerequisites
 
+> **_실행전 수정해야 하는 부분_**
+
+```
+/client/pages/_app.js
+
+function MyApp({ Component, pageProps }) {
+  ...
+  const [newErc721addr, setNewErc721Addr] = useState("자신이 발행한 이더리움 컨트랙트 주소");
+  const [newKip17addr, setNewKip17Addr] = useState("자신이 발행한 클레이튼 컨트랙트 주소");
+  ...
+}
+```
+
 > **_설치된 modules_**
 
 ```
