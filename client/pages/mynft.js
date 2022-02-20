@@ -5,10 +5,8 @@ import { Button, Dimmer, Divider, Icon, Label, Loader, Segment } from "semantic-
 import styles from "../styles/mynft.module.css";
 import kip17Abi from "../src/kip17Abi";
 
-export default function mynft({ caver, web3, account, tokenContract, walletType }) {
+export default function mynft({ caver, web3, account, tokenContract, walletType, newErc721addr, newKip17addr }) {
   const [nftlist, setNftlist] = useState([]);
-  const [newErc721addr, setNewErc721Addr] = useState("0x787b226eA9B0c0b8f3558EA4b9aE088fDE7B7b3B");
-  const [newKip17addr, setNewKip17Addr] = useState("0x5D5232969dAb1134c25b2847A0490686A425561A");
   const [isLoading, setIsLoading] = useState(true);
   const klayImageProps = {
     avatar: true,
