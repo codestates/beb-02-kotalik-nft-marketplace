@@ -51,8 +51,10 @@ export default function Header({ connectKaikas, connectWallet, account, tokenSav
                 <Label color="red"> Unconnected Accout</Label>
               ) : walletType === "eth" ? (
                 <Label as="a" color="orange" content="MetaMask" image={metaImageProps} />
-              ) : (
+              ) : walletType === "klay" ? (
                 <Label as="a" color="gray" content="Kaikas" image={klayImageProps} />
+              ) : (
+                <Label color="red"> Unconnected Accout</Label>
               )}
             </div>
           </li>
